@@ -1,22 +1,31 @@
-import React from "react";
-import styled from "styled-components";
+import React, { useState } from "react";
+import styled, { css } from "styled-components";
+import { Link } from "react-router-dom";
 import { NavMenuData } from "../../Data/NavData";
 
 const NavMenu = () => {
-  const onClick = (e) => {
-    console.log(e.target.value);
+  const [select, setSelect] = useState(null);
+  const handleSelect = (event) => {
+    event.preventDefault();
+    const { name, value } = event.target;
+    console.log(name, value);
   };
   return (
     <NavMenuBlock>
       <NavMenuTitle>
         {NavMenuData.map((data) => {
           return (
-            <ul key={data.id}>
-              <li onClick={onClick}>
+            <NavMenuElement
+              key={data.id}
+              onClick={(event) => handleSelect(event)}
+              name={data.name}
+              value={data.id}
+            >
+              <Link to={data.path}>
                 {data.icon}
-                <span>{data.name}</span>
-              </li>
-            </ul>
+                <span>{data.title}</span>
+              </Link>
+            </NavMenuElement>
           );
         })}
       </NavMenuTitle>
@@ -33,7 +42,9 @@ const NavMenuTitle = styled.div`
   font-size: 20px;
   font-weight: 500;
   margin-top: 10px;
-  li {
+
+  /* li {
+    flex: 1;
     color: #bdbdbd;
     display: flex;
     align-items: center;
@@ -45,6 +56,29 @@ const NavMenuTitle = styled.div`
     span {
       padding-left: 14px;
     }
+    ${(props) =>
+    props.select &&
+    css`
+      background: "red";
+    `}
+  } */
+`;
+
+const NavMenuElement = styled.button`
+  height: auto;
+  font-size: 20px;
+  font-weight: bolder;
+  color: #bdbdbd;
+  display: flex;
+  align-items: center;
+  padding: 20px 0 20px 10px;
+  cursor: pointer;
+  &:hover {
+    color: white;
+  }
+  span {
+    margin-left: 14px;
   }
 `;
+
 export default NavMenu;

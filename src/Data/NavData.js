@@ -5,17 +5,23 @@ import { VscLibrary } from "react-icons/vsc";
 export const NavMenuData = [
   {
     id: 1,
-    name: "HOME",
+    title: "HOME",
+    name: "home",
     icon: <AiOutlineHome />,
+    path: "/home",
   },
   {
     id: 2,
-    name: "SEARCH",
+    title: "SEARCH",
+    name: "search",
     icon: <AiOutlineSearch />,
+    path: "/search",
   },
   {
     id: 3,
-    name: "MY LIBRARY",
+    title: "MY LIBRARY",
+    name: "mylibrary",
     icon: <VscLibrary />,
+    path: "library",
   },
 ];
