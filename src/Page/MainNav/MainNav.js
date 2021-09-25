@@ -7,7 +7,6 @@ const MainNav = () => {
   return (
     <MainNavBlock>
       <Arrow />
-      <span style={{ marginRight: "40px" }}>하하하핳하하핳하하ㅏ</span>
       <Profile />
     </MainNavBlock>
   );
@@ -19,7 +18,7 @@ const MainNavBlock = styled.div`
   align-items: center;
   width: auto;
   height: 60px;
-  background: red;
+  position: sticky;
 `;
 
 export default MainNav;

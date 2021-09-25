@@ -9,7 +9,7 @@ const HomeTemplateBlock = styled.div`
   display: flex;
   width: 100%;
   flex-direction: column;
-  padding: 10px 30px;
+  padding: 30px 40px;
 `;
 
 export default HomeTemplate;

@@ -8,7 +8,7 @@ export const NavMenuData = [
     title: "HOME",
     name: "home",
     icon: <AiOutlineHome />,
-    path: "/home",
+    path: "/",
   },
   {
     id: 2,

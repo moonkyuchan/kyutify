@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
 import { NavMenuData } from "../../Data/NavData";
 
 const NavMenu = () => {
-  const [select, setSelect] = useState(null);
   const handleSelect = (event) => {
     event.preventDefault();
     const { name, value } = event.target;

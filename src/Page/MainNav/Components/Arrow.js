@@ -18,7 +18,6 @@ const ArrowWrap = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100px;
-  background: blue;
   .arrow {
     font-size: 40px;
     cursor: pointer;

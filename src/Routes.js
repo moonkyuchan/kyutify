@@ -13,7 +13,7 @@ class Routes extends React.Component {
         <RouteBlock>
           <Nav />
           <Switch>
-            <Route exact path="/home" component={Home} />
+            <Route exact path="/" component={Home} />
             <Route exact path="/search" component={Search} />
             <Route exact path="/library" component={Library} />
           </Switch>
