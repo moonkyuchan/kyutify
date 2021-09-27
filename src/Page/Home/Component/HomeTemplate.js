@@ -7,9 +7,10 @@ const HomeTemplate = ({ children }) => {
 
 const HomeTemplateBlock = styled.div`
   display: flex;
-  width: 100%;
   flex-direction: column;
   padding: 30px 40px;
+  flex: 1;
+  position: relative;
 `;
 
 export default HomeTemplate;

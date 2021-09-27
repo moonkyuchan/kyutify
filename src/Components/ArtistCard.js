@@ -1,17 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 import PlayButton from "./PlayButton";
-import test from "../test.jpeg";
 import { PlayButtonBlock } from "./PlayButton";
+import test from "../test.jpeg";
 
-const ArtistCard = () => {
+const ArtistCard = ({ name, info, imgSrc }) => {
   return (
     <ArtistBlock>
       <ArtistImg src={test} />
       <PlayButton />
       <ArtistTitleWrap>
-        <ArtistName>Ed Sheeran</ArtistName>
-        <ArtistInfo>아티스트</ArtistInfo>
+        <ArtistName>{name}</ArtistName>
+        <ArtistInfo>{info}</ArtistInfo>
       </ArtistTitleWrap>
     </ArtistBlock>
   );
@@ -28,11 +28,14 @@ const ArtistBlock = styled.div`
   flex-direction: column;
   align-items: center;
   position: relative;
-  width: 220px;
+  width: 200px;
   height: 280px;
   border-radius: 5px;
-  padding: 15px;
+  padding: 15px 0;
   background: #212121;
+
+  transition: background 0.3s ease-in;
+
   &:hover {
     background: #484848;
     ${ArtistImg} {

@@ -25,6 +25,6 @@ export const PlayButtonBlock = styled.div`
 
   transform: translateY(0);
   opacity: 0;
-  transition: 1s;
+  transition: 0.7s;
 `;
 export default PlayButton;

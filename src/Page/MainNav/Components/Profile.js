@@ -6,7 +6,7 @@ import { BiDownArrow } from "react-icons/bi";
 const Profile = () => {
   return (
     <ProfileBlock>
-      <CgProfile style={{ fontSize: "40px" }} />
+      <CgProfile style={{ fontSize: "30px" }} />
       <span>KYU</span>
       <BiDownArrow />
     </ProfileBlock>

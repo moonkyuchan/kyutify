@@ -13,6 +13,8 @@ const NavtemplateBlock = styled.div`
   background: #000;
   padding: 24px;
   color: white;
+  position: sticky;
+  top: 1px;
 `;
 
 export default Navtemplate;

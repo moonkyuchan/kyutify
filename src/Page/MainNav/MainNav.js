@@ -18,6 +18,7 @@ const MainNavBlock = styled.div`
   align-items: center;
   width: auto;
   height: 60px;
+  margin-bottom: 50px;
   position: sticky;
 `;
 
