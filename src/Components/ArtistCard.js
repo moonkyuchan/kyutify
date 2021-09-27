@@ -2,13 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import PlayButton from "./PlayButton";
 import test from "../test.jpeg";
+import { PlayButtonBlock } from "./PlayButton";
 
 const ArtistCard = () => {
   return (
     <ArtistBlock>
-      <ArtistImg>
-        <PlayButton />
-      </ArtistImg>
+      <ArtistImg src={test} />
+      <PlayButton />
       <ArtistTitleWrap>
         <ArtistName>Ed Sheeran</ArtistName>
         <ArtistInfo>아티스트</ArtistInfo>
@@ -16,11 +16,18 @@ const ArtistCard = () => {
     </ArtistBlock>
   );
 };
+const ArtistImg = styled.img`
+  width: 170px;
+  height: 170px;
+  border: 0px solid black;
+  border-radius: 50%;
+`;
 
 const ArtistBlock = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
   width: 220px;
   height: 280px;
   border-radius: 5px;
@@ -28,16 +35,13 @@ const ArtistBlock = styled.div`
   background: #212121;
   &:hover {
     background: #484848;
+    ${ArtistImg} {
+      box-shadow: 0.5px 0.5px black, -0.2em 0 1em black;
+    }
+    ${PlayButtonBlock} {
+      display: inherit;
+    }
   }
-`;
-
-const ArtistImg = styled.div`
-  width: 170px;
-  height: 170px;
-  border: 0px solid black;
-  border-radius: 50%;
-  background-image: url(${test});
-  background-size: 100% 100%;
 `;
 
 const ArtistTitleWrap = styled.div`

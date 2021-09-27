@@ -10,17 +10,18 @@ const PlayButton = () => {
   );
 };
 
-const PlayButtonBlock = styled.div`
-  position: relative;
+export const PlayButtonBlock = styled.div`
+  position: absolute;
+  right: 30px;
+  top: 140px;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  top: 125px;
-  left: 120px;
   width: 45px;
   height: 45px;
   background: #8bc34a;
   cursor: pointer;
+  display: none;
 `;
 export default PlayButton;
