@@ -40,6 +40,8 @@ const ArtistBlock = styled.div`
     }
     ${PlayButtonBlock} {
       display: inherit;
+      transform: translateY(-5px);
+      opacity: 1;
     }
   }
 `;

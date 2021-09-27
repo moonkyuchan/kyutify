@@ -22,6 +22,9 @@ export const PlayButtonBlock = styled.div`
   height: 45px;
   background: #8bc34a;
   cursor: pointer;
-  display: none;
+
+  transform: translateY(0);
+  opacity: 0;
+  transition: 1s;
 `;
 export default PlayButton;
