@@ -4,14 +4,14 @@ import PlayButton from "./PlayButton";
 import { PlayButtonBlock } from "./PlayButton";
 import test from "../test.jpeg";
 
-const ArtistCard = ({ name, info, imgSrc }) => {
+const ArtistCard = ({ name, type, imgSrc }) => {
   return (
     <ArtistBlock>
       <ArtistImg src={test} />
       <PlayButton />
       <ArtistTitleWrap>
         <ArtistName>{name}</ArtistName>
-        <ArtistInfo>{info}</ArtistInfo>
+        <ArtistInfo>{type}</ArtistInfo>
       </ArtistTitleWrap>
     </ArtistBlock>
   );

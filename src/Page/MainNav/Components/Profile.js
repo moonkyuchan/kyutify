@@ -20,7 +20,7 @@ const ProfileBlock = styled.div`
   background: black;
   border: 0px solid black;
   border-radius: 50px;
-  padding: 0 9px;
+  padding: 3px 9px;
   cursor: pointer;
   &:hover {
     background: white;

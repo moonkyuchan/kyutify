@@ -6,26 +6,24 @@ import Home from "./Page/Home/Home";
 import Library from "./Page/Library/Library";
 import Search from "./Page/Search/Search";
 
-class Routes extends React.Component {
-  render() {
-    return (
-      <Router>
-        <RouteBlock>
-          <Nav />
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/search" component={Search} />
-            <Route exact path="/library" component={Library} />
-          </Switch>
-        </RouteBlock>
-      </Router>
-    );
-  }
-}
+const Routes = () => {
+  return (
+    <Router>
+      <RouteBlock>
+        <Nav />
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/search" component={Search} />
+          <Route exact path="/library" component={Library} />
+        </Switch>
+      </RouteBlock>
+    </Router>
+  );
+};
 
 const RouteBlock = styled.div`
   display: flex;
-  background: linear-gradient(to bottom, #424242, #1b1b1b);
+  background: linear-gradient(to bottom, #424242, 10%, #212121);
   color: white;
 `;
 
