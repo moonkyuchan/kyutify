@@ -11,6 +11,7 @@ const HomeTemplateBlock = styled.div`
   padding: 30px 40px;
   flex: 1;
   position: relative;
+  max-width: 1600px;
 `;
 
 export default HomeTemplate;

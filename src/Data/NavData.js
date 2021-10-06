@@ -22,6 +22,6 @@ export const NavMenuData = [
     title: "MY LIBRARY",
     name: "mylibrary",
     icon: <VscLibrary />,
-    path: "library",
+    path: "/library",
   },
 ];

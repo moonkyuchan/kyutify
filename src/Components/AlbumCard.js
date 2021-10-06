@@ -2,16 +2,15 @@ import React from "react";
 import styled from "styled-components";
 import PlayButton from "./PlayButton";
 import { PlayButtonBlock } from "./PlayButton";
-import test from "../test.jpeg";
 
-const AlbumCrad = ({ name, info, imgSrc }) => {
+const AlbumCrad = ({ name, type, imgSrc }) => {
   return (
     <AlbumBlock>
-      <AlbumImg src={test} />
+      <AlbumImg src={imgSrc} />
       <PlayButton />
       <AlbumTitleWrap>
         <AlbumName>{name}</AlbumName>
-        <AlbumInfo>{info}</AlbumInfo>
+        <AlbumInfo>{type}</AlbumInfo>
       </AlbumTitleWrap>
     </AlbumBlock>
   );
@@ -54,6 +53,9 @@ const AlbumTitleWrap = styled.div`
   margin-top: 15px;
   padding: 5px 0;
   color: white;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 const AlbumName = styled.h1`
   font-weight: bold;

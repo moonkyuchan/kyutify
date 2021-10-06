@@ -2,12 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import PlayButton from "./PlayButton";
 import { PlayButtonBlock } from "./PlayButton";
-import test from "../test.jpeg";
 
 const ArtistCard = ({ name, type, imgSrc }) => {
   return (
     <ArtistBlock>
-      <ArtistImg src={test} />
+      <ArtistImg src={imgSrc} />
       <PlayButton />
       <ArtistTitleWrap>
         <ArtistName>{name}</ArtistName>

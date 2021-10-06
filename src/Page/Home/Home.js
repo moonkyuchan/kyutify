@@ -1,106 +1,95 @@
 import React, { useEffect, useState } from "react";
 import MainNav from "../MainNav/MainNav";
 import HomeTemplate from "./Component/HomeTemplate";
-import ArtistCard from "../../Components/ArtistCard";
-import styled from "styled-components";
-// import { ArtistCardData } from "../../Data/ArtistCardData";
+// import ArtistCard from "../../Components/ArtistCard";
 // import AlbumCard from "../../Components/AlbumCard";
+import styled from "styled-components";
+import { instance, GET_CATEGORIES } from "../../config";
+import { useSelector } from "react-redux";
+import DropDown from "./Component/DropDown";
 import axios from "axios";
-import {
-  TOKEN_REQUEST_API,
-  TOKEN_AUTH,
-  instance,
-  ARTIST_API,
-} from "../../config";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchToken } from "../../store/action";
 
-// const albumCards = ArtistCardData.map((album) => {
-//   return (
-//     <AlbumCard
-//       key={album.id}
-//       name={album.name}
-//       info={album.info}
-//       imgSrc={album.src}
-//     />
-//   );
-// });
 const Home = () => {
-  console.log("home Component");
   const token = useSelector((state) => state.tokenReducer);
-  const dispatch = useDispatch();
 
-  const [artist, setArtist] = useState({});
+  const [genres, setGenres] = useState({
+    selectedGenre: "",
+    listOfGenresFromAPI: [],
+  });
+  const [playlist, setPlaylist] = useState({
+    selectedPlaylist: "",
+    listOfPlaylistFromAPI: [],
+  });
 
   useEffect(() => {
-    getToken();
-    console.log("useEffect getToken()");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    getArtist();
-    console.log("useEffect getArtist()");
-  }, [token]);
-
-  const getToken = async () => {
-    console.log("getToken()");
-    await axios(TOKEN_REQUEST_API, {
-      headers: { Authorization: TOKEN_AUTH },
-      data: "grant_type=client_credentials",
-      method: "POST",
-    })
-      .then((tokenRes) => {
-        dispatch(fetchToken(tokenRes.data.access_token));
-        instance.defaults.headers.common[
-          "Authorization"
-        ] = `Bearer ${tokenRes.data.access_token}`;
-      })
-      .catch((err) => {
-        console.log("token Err", err);
+    async function getCategories() {
+      const res = await instance.get(GET_CATEGORIES);
+      setGenres({
+        selectedGenre: genres.selectedGenre,
+        listOfGenresFromAPI: res.data.categories.items,
       });
+    }
+    getCategories();
+  }, [genres.selectedGenre, token]);
+
+  const genreChanged = (val) => {
+    setGenres({
+      selectedGenre: val,
+      listOfGenresFromAPI: genres.listOfGenresFromAPI,
+    });
+    axios(
+      `https://api.spotify.com/v1/browse/categories/${val}/playlists?limit=20`,
+      {
+        method: "GET",
+        headers: { Authorization: "Bearer " + token },
+      }
+    ).then((playlistResponse) => {
+      setPlaylist({
+        selectedPlaylist: playlist.selectedPlaylist,
+        listOfPlaylistFromAPI: playlistResponse.data.playlists.items,
+      });
+    });
   };
 
-  const getArtist = async () => {
-    console.log("getArtist");
-    const res = await instance.get(
-      ARTIST_API +
-        "?ids=2CIMQHirSU0MQqyYHq0eOx%2C57dN52uHvrHOxijzpIgu3E%2C1vCWHaC5f2uS3yhpwWbIA6"
-    );
-    setArtist(res.data);
+  const playlistChanged = (val) => {
+    setPlaylist({
+      selectedPlaylist: val,
+      listOfPlaylistFromAPI: playlist.listOfPlaylistFromAPI,
+    });
+  };
+
+  const handleOnsubmit = (e) => {
+    e.preventDefault();
   };
 
   return (
     <HomeTemplate>
       <MainNav />
+      <form onSubmit={handleOnsubmit}>
+        <DropDown
+          options={genres.listOfGenresFromAPI}
+          seletedValue={genres.selectedGenre}
+          changed={genreChanged}
+        />
+        <DropDown
+          options={playlist.listOfPlaylistFromAPI}
+          seletedValue={playlist.selectedPlaylist}
+          changed={playlistChanged}
+        />
+        <button type="submit">Search</button>
+      </form>
       <Section>
-        <span>최근 재생한 항목</span>
-        <div className="section">
-          {artist.artists.map((data) => (
-            <ArtistCard key={data.id} name={data.name} type={data.type} />
+        {/* <div className="section">
+          {newRelease?.albums?.items?.map((data, idx) => (
+            <AlbumCard
+              key={idx}
+              name={data.name}
+              type={data.type}
+              imgSrc={data.images[0].url}
+            />
           ))}
-        </div>
+        </div> */}
       </Section>
-      {/* <Section>
-        <span>인기 아티스트</span>
-        <section>{artistCards}</section>
-      </Section> */}
-      {/* <Section>
-        <span>인기 앨범</span>
-        <section>{albumCards}</section>
-      </Section>
-      <Section>
-        <span>음악으로 집안을 가득 채우세요</span>
-        <section>{albumCards}</section>
-      </Section>
-      <Section>
-        <span>최신 인기 음악</span>
-        <section>{albumCards}</section>
-      </Section>
-      <Section>
-        <span>무드</span>
-        <section>{albumCards}</section>
-      </Section> */}
     </HomeTemplate>
   );
 };
