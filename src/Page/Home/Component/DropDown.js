@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 
 const DropDown = (props) => {
   const dropDownChanged = (e) => {
@@ -9,7 +10,7 @@ const DropDown = (props) => {
   };
 
   return (
-    <div>
+    <DropDownBlock>
       <select value={props.selectedValue} onChange={dropDownChanged}>
         {props.options?.map((items, idx) => (
           <option key={idx} value={items.id}>
@@ -17,8 +18,21 @@ const DropDown = (props) => {
           </option>
         ))}
       </select>
-    </div>
+    </DropDownBlock>
   );
 };
+
+const DropDownBlock = styled.div`
+  select {
+    width: 300px;
+    height: 40px;
+    padding: 10px;
+    margin-top: 10px;
+    background: black;
+    border: 1px solid white;
+    color: white;
+    font-size: 15px;
+  }
+`;
 
 export default DropDown;

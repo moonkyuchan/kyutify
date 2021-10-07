@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import MainNav from "../MainNav/MainNav";
 import HomeTemplate from "./Component/HomeTemplate";
 // import ArtistCard from "../../Components/ArtistCard";
-// import AlbumCard from "../../Components/AlbumCard";
+import AlbumCard from "../../Components/AlbumCard";
 import styled from "styled-components";
 import { instance, GET_CATEGORIES } from "../../config";
 import { useSelector } from "react-redux";
@@ -20,6 +20,11 @@ const Home = () => {
     selectedPlaylist: "",
     listOfPlaylistFromAPI: [],
   });
+  const [tracks, setTracks] = useState({
+    selectedTrack: "",
+    listOfTracksFromAPI: [],
+  });
+  console.log(tracks);
 
   useEffect(() => {
     async function getCategories() {
@@ -58,37 +63,44 @@ const Home = () => {
     });
   };
 
-  const handleOnsubmit = (e) => {
+  const handleOnsubmit = async (e) => {
     e.preventDefault();
+    const res = await instance.get(
+      `playlists/${playlist.selectedPlaylist}/tracks?limit=10`
+    );
+    setTracks({
+      selectedTrack: tracks.selectedTrack,
+      listOfTracksFromAPI: res.data.items,
+    });
   };
 
   return (
     <HomeTemplate>
       <MainNav />
-      <form onSubmit={handleOnsubmit}>
-        <DropDown
-          options={genres.listOfGenresFromAPI}
-          seletedValue={genres.selectedGenre}
-          changed={genreChanged}
-        />
-        <DropDown
-          options={playlist.listOfPlaylistFromAPI}
-          seletedValue={playlist.selectedPlaylist}
-          changed={playlistChanged}
-        />
-        <button type="submit">Search</button>
-      </form>
       <Section>
-        {/* <div className="section">
-          {newRelease?.albums?.items?.map((data, idx) => (
+        <form onSubmit={handleOnsubmit}>
+          <DropDown
+            options={genres.listOfGenresFromAPI}
+            seletedValue={genres.selectedGenre}
+            changed={genreChanged}
+          />
+          <DropDown
+            options={playlist.listOfPlaylistFromAPI}
+            seletedValue={playlist.selectedPlaylist}
+            changed={playlistChanged}
+          />
+          <SearchButton type="submit">Search</SearchButton>
+        </form>
+        <div className="section">
+          {tracks?.listOfTracksFromAPI?.map((data, idx) => (
             <AlbumCard
               key={idx}
-              name={data.name}
-              type={data.type}
-              imgSrc={data.images[0].url}
+              name={data.track.name}
+              type={data.track.album.album_type}
+              imgSrc={data.track.album.images[0].url}
             />
           ))}
-        </div> */}
+        </div>
       </Section>
     </HomeTemplate>
   );
@@ -97,7 +109,6 @@ const Home = () => {
 const Section = styled.div`
   display: flex;
   flex-direction: column;
-  height: 300px;
   margin-bottom: 50px;
   span {
     font-size: 25px;
@@ -109,6 +120,21 @@ const Section = styled.div`
     grid-template-columns: repeat(6, 1fr);
     overflow: hidden;
     place-items: center;
+    margin-top: 50px;
+  }
+`;
+
+const SearchButton = styled.button`
+  border: 1px solid white;
+  border-radius: 10px;
+  background: black;
+  margin-top: 10px;
+  width: 100px;
+  height: 40px;
+  font-size: 15px;
+  color: white;
+  &:hover {
+    background: grey;
   }
 `;
 

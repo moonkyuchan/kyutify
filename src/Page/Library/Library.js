@@ -1,7 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
+import styled from "styled-components";
+import Modal from "../../Components/Modal";
 
 const Library = () => {
-  return <div>라이브러리 페이지입니다.</div>;
+  const [showModal, setShowModal] = useState(false);
+  console.log(showModal);
+  const handleModal = () => {
+    setShowModal(!showModal);
+  };
+  return (
+    <>
+      {showModal && <Modal handleModal={handleModal} />}
+      <SHOW onClick={handleModal}>button</SHOW>
+    </>
+  );
 };
+
+const SHOW = styled.button`
+  color: white;
+`;
 
 export default Library;
