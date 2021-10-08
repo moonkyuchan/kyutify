@@ -2,9 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import ArtistCard from "./ArtistCard";
-import { ArtistCardData } from "../Data/ArtistCardData";
 
-const Modal = ({ handleModal }) => {
+const Modal = ({ handleModal, track }) => {
   return (
     <ModalBack onClick={handleModal}>
       <ModalBlock onClick={(e) => e.stopPropagation()}>
@@ -13,7 +12,7 @@ const Modal = ({ handleModal }) => {
             <AiOutlineCloseCircle />
           </CloseButton>
           <CardWrap>
-            {ArtistCardData.map((data, idx) => {
+            {track.map((data, idx) => {
               return <ArtistCard key={idx} name={data.name} type={data.type} />;
             })}
           </CardWrap>

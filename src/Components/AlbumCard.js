@@ -3,9 +3,9 @@ import styled from "styled-components";
 import PlayButton from "./PlayButton";
 import { PlayButtonBlock } from "./PlayButton";
 
-const AlbumCrad = ({ name, type, imgSrc }) => {
+const AlbumCrad = ({ id, name, type, imgSrc, getTrackId }) => {
   return (
-    <AlbumBlock>
+    <AlbumBlock id={id} onClick={() => getTrackId(id)}>
       <AlbumImg src={imgSrc} />
       <PlayButton />
       <AlbumTitleWrap>
@@ -31,7 +31,7 @@ const AlbumBlock = styled.div`
   border-radius: 5px;
   padding: 15px 0;
   background: #212121;
-
+  cursor: pointer;
   transition: background 0.3s ease-in;
 
   &:hover {
@@ -39,11 +39,11 @@ const AlbumBlock = styled.div`
     ${AlbumImg} {
       box-shadow: 0.5px 0.5px black, -0.2em 0 1em black;
     }
-    ${PlayButtonBlock} {
+    /* ${PlayButtonBlock} {
       display: inherit;
       transform: translateY(-5px);
       opacity: 1;
-    }
+    } */
   }
 `;
 

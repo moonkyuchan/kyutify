@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { instance, GET_CATEGORIES } from "../../config";
+import axios from "axios";
+import styled from "styled-components";
 import MainNav from "../MainNav/MainNav";
 import HomeTemplate from "./Component/HomeTemplate";
-// import ArtistCard from "../../Components/ArtistCard";
 import AlbumCard from "../../Components/AlbumCard";
-import styled from "styled-components";
-import { instance, GET_CATEGORIES } from "../../config";
-import { useSelector } from "react-redux";
 import DropDown from "./Component/DropDown";
-import axios from "axios";
 
 const Home = () => {
   const token = useSelector((state) => state.tokenReducer);
@@ -24,7 +23,8 @@ const Home = () => {
     selectedTrack: "",
     listOfTracksFromAPI: [],
   });
-  console.log(tracks);
+  const [trackId, setTrackId] = useState(null);
+  console.log(trackId);
 
   useEffect(() => {
     async function getCategories() {
@@ -74,6 +74,12 @@ const Home = () => {
     });
   };
 
+  const getTrackId = (id) => {
+    const currentTracks = [...tracks.listOfTracksFromAPI];
+    const trackId = currentTracks?.filter((data) => data.track.id === id);
+    setTrackId(trackId[0]?.track);
+  };
+
   return (
     <HomeTemplate>
       <MainNav />
@@ -95,9 +101,11 @@ const Home = () => {
           {tracks?.listOfTracksFromAPI?.map((data, idx) => (
             <AlbumCard
               key={idx}
+              id={data.track.id}
               name={data.track.name}
               type={data.track.album.album_type}
               imgSrc={data.track.album.images[0].url}
+              getTrackId={getTrackId}
             />
           ))}
         </div>

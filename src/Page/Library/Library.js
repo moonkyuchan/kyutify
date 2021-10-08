@@ -4,7 +4,6 @@ import Modal from "../../Components/Modal";
 
 const Library = () => {
   const [showModal, setShowModal] = useState(false);
-  console.log(showModal);
   const handleModal = () => {
     setShowModal(!showModal);
   };
