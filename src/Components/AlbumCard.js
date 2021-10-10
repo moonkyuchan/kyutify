@@ -5,9 +5,9 @@ import { PlayButtonBlock } from "./PlayButton";
 
 const AlbumCrad = ({ id, name, type, imgSrc, getTrackId }) => {
   return (
-    <AlbumBlock id={id} onClick={() => getTrackId(id)}>
+    <AlbumBlock>
       <AlbumImg src={imgSrc} />
-      <PlayButton />
+      <PlayButton getTrackId={getTrackId} id={id} />
       <AlbumTitleWrap>
         <AlbumName>{name}</AlbumName>
         <AlbumInfo>{type}</AlbumInfo>

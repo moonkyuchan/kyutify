@@ -2,9 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import { BiRightArrow } from "react-icons/bi";
 
-const PlayButton = () => {
+const PlayButton = ({ getTrackId, id }) => {
   return (
-    <PlayButtonBlock>
+    <PlayButtonBlock onClick={() => getTrackId(id)}>
       <BiRightArrow />
     </PlayButtonBlock>
   );

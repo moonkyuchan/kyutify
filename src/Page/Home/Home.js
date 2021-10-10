@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { instance, GET_CATEGORIES } from "../../config";
 import axios from "axios";
 import styled from "styled-components";
@@ -7,9 +7,11 @@ import MainNav from "../MainNav/MainNav";
 import HomeTemplate from "./Component/HomeTemplate";
 import AlbumCard from "../../Components/AlbumCard";
 import DropDown from "./Component/DropDown";
+import { fetchTrack } from "../../store/action";
 
 const Home = () => {
   const token = useSelector((state) => state.tokenReducer);
+  const dispatch = useDispatch();
 
   const [genres, setGenres] = useState({
     selectedGenre: "",
@@ -77,6 +79,7 @@ const Home = () => {
     const currentTracks = [...tracks.listOfTracksFromAPI];
     const trackId = currentTracks?.filter((data) => data.track.id === id);
     setTrackId(trackId[0]?.track);
+    dispatch(fetchTrack(trackId));
   };
 
   return (

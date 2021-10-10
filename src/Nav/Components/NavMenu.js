@@ -15,17 +15,16 @@ const NavMenu = () => {
       <NavMenuTitle>
         {NavMenuData.map((data, idx) => {
           return (
-            <NavMenuElement
-              key={idx}
-              id={data.id}
-              onClick={() => selectedMenu(data.id)}
-              selectedBack={selectedBack}
-            >
-              <Link to={data.path}>
+            <Link to={data.path} key={idx}>
+              <NavMenuElement
+                id={data.id}
+                onClick={() => selectedMenu(data.id)}
+                selectedBack={selectedBack}
+              >
                 {data.icon}
                 <span>{data.title}</span>
-              </Link>
-            </NavMenuElement>
+              </NavMenuElement>
+            </Link>
           );
         })}
       </NavMenuTitle>

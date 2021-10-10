@@ -6,3 +6,12 @@ export const fetchToken = (localToken) => {
     payload: localToken,
   };
 };
+
+export const TRACK = "TRACK";
+
+export const fetchTrack = (track) => {
+  return {
+    type: TRACK,
+    payload: track,
+  };
+};
