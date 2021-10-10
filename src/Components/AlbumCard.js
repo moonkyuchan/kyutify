@@ -39,11 +39,11 @@ const AlbumBlock = styled.div`
     ${AlbumImg} {
       box-shadow: 0.5px 0.5px black, -0.2em 0 1em black;
     }
-    /* ${PlayButtonBlock} {
+    ${PlayButtonBlock} {
       display: inherit;
       transform: translateY(-5px);
       opacity: 1;
-    } */
+    }
   }
 `;
 

@@ -24,7 +24,6 @@ const Home = () => {
     listOfTracksFromAPI: [],
   });
   const [trackId, setTrackId] = useState(null);
-  console.log(trackId);
 
   useEffect(() => {
     async function getCategories() {

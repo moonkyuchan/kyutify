@@ -1,24 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
 import { NavMenuData } from "../../Data/NavData";
 
 const NavMenu = () => {
-  const handleSelect = (event) => {
-    event.preventDefault();
-    const { name, value } = event.target;
-    console.log(name, value);
+  const [selectedBack, setSelectedBack] = useState(0);
+  const selectedMenu = (id) => {
+    const currentMenu = [...NavMenuData];
+    const menuId = currentMenu?.filter((data) => data.id === id);
+    setSelectedBack(menuId[0].id);
   };
   return (
     <NavMenuBlock>
       <NavMenuTitle>
-        {NavMenuData.map((data) => {
+        {NavMenuData.map((data, idx) => {
           return (
             <NavMenuElement
-              key={data.id}
-              onClick={(event) => handleSelect(event)}
-              name={data.name}
-              value={data.id}
+              key={idx}
+              id={data.id}
+              onClick={() => selectedMenu(data.id)}
+              selectedBack={selectedBack}
             >
               <Link to={data.path}>
                 {data.icon}
@@ -41,29 +42,10 @@ const NavMenuTitle = styled.div`
   font-size: 20px;
   font-weight: 500;
   margin-top: 10px;
-
-  /* li {
-    flex: 1;
-    color: #bdbdbd;
-    display: flex;
-    align-items: center;
-    padding: 20px 0 20px 10px;
-    cursor: pointer;
-    &:hover {
-      color: white;
-    }
-    span {
-      padding-left: 14px;
-    }
-    ${(props) =>
-    props.select &&
-    css`
-      background: "red";
-    `}
-  } */
 `;
 
 const NavMenuElement = styled.button`
+  width: 100%;
   height: auto;
   font-size: 20px;
   font-weight: bolder;
@@ -78,6 +60,17 @@ const NavMenuElement = styled.button`
   span {
     margin-left: 14px;
   }
+  ${(props) =>
+    props.selectedBack === props.id &&
+    css`
+      border: 0px solid black;
+      border-radius: 5px;
+      background: #c7c7c7;
+      color: black;
+      &:hover {
+        color: black;
+      }
+    `}
 `;
 
 export default NavMenu;
