@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
+import ReactAudioPlayer from "react-audio-player";
 import styled from "styled-components";
 import { BiRightArrow } from "react-icons/bi";
+import { AiOutlinePause } from "react-icons/ai";
+import { useSelector } from "react-redux";
 
-const PlayButton = ({ getTrackId, id }) => {
+const PlayButton = ({ getTrackId, id, trackId }) => {
+  const test = useSelector((state) => state.trackReducer);
+  const playurl = test[0]?.track?.preview_url;
+  console.log("리덕스로 넘어온 data", test);
+  console.log("prop로 넘어온 data", trackId);
+
   return (
     <PlayButtonBlock onClick={() => getTrackId(id)}>
-      <BiRightArrow />
+      {trackId?.playPause ? <AiOutlinePause /> : <BiRightArrow />}
+      {/* <ReactAudioPlayer src={playurl} autoPlay="true" volume="0.1" /> */}
     </PlayButtonBlock>
   );
 };

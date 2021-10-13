@@ -25,7 +25,10 @@ const Home = () => {
     selectedTrack: "",
     listOfTracksFromAPI: [],
   });
-  const [trackId, setTrackId] = useState(null);
+  const [trackId, setTrackId] = useState({
+    playPause: false,
+    selectedTrackId: null,
+  });
 
   useEffect(() => {
     async function getCategories() {
@@ -77,9 +80,12 @@ const Home = () => {
 
   const getTrackId = (id) => {
     const currentTracks = [...tracks.listOfTracksFromAPI];
-    const trackId = currentTracks?.filter((data) => data.track.id === id);
-    setTrackId(trackId[0]?.track);
-    dispatch(fetchTrack(trackId));
+    const fliterTrackId = currentTracks?.filter((data) => data.track.id === id);
+    setTrackId({
+      playPause: !trackId.playPause,
+      selectedTrackId: fliterTrackId[0]?.track,
+    });
+    dispatch(fetchTrack(fliterTrackId));
   };
 
   return (
@@ -108,6 +114,7 @@ const Home = () => {
               type={data.track.album.album_type}
               imgSrc={data.track.album.images[0].url}
               getTrackId={getTrackId}
+              trackId={trackId}
             />
           ))}
         </div>

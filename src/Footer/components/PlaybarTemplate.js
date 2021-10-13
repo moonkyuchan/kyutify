@@ -13,7 +13,7 @@ const PlaybarBlock = styled.div`
   height: 90px;
   background: black;
   position: sticky;
-  bottom: 1px;
+  bottom: 0px;
 `;
 
 export default PlaybarTemplate;

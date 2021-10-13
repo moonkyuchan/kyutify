@@ -23,3 +23,4 @@ export const instance = axios.create({
 export const ARTIST_API = "artists";
 export const NEW_RELEASE = "browse/new-releases?country=KR";
 export const GET_CATEGORIES = "browse/categories?locale=sv_KR";
+export const SEARCH = "search";
