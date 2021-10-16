@@ -36,19 +36,48 @@ const Search = () => {
     setInputValue(value);
   };
 
+  const searchForm = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <SearchTemplate>
-      <SearchBar placeholder="검색" onChange={handleInput} />
+      <SearchSection>
+        <form onSubmit={searchForm}>
+          <SearchBar placeholder="검색" onChange={handleInput} />
+          <SearchButton type="submit">Search</SearchButton>
+        </form>
+      </SearchSection>
     </SearchTemplate>
   );
 };
+
+const SearchSection = styled.div`
+  display: flex;
+`;
 const SearchBar = styled.input`
+  border-radius: 10px;
   width: 400px;
   height: 50px;
-  padding: 10px;
+  padding: 0 15px 0 15px;
 
   ::placeholder {
     color: grey;
   }
 `;
+
+const SearchButton = styled.button`
+  border: 0px solid black;
+  border-radius: 10px;
+  background: #eeeeee;
+  width: 120px;
+  height: 40px;
+  margin-left: 20px;
+  &:hover {
+    background: #1b1b1b;
+    color: #f5f5f5;
+    border: 1px solid white;
+  }
+`;
+
 export default Search;
