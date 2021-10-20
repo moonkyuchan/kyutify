@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { useSelector } from "react-redux";
 
 const PlayInfo = () => {
@@ -21,20 +21,25 @@ const PlayInfoBlock = styled.div`
   align-items: center;
   width: 25%;
   height: 90px;
-  border: 0px solid black;
-  background: pink;
+  /* border: 0px solid black;
+  background: pink; */
   padding: 0 20px 0 40px;
 `;
 
 const TrackImg = styled.img`
-  width: 56px;
-  height: 56px;
+  ${(props) =>
+    props.src &&
+    css`
+      width: 56px;
+      height: 56px;
+    `}
 `;
 
 const TrackTitle = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: 30px;
+  color: white;
   .mainTitle {
     font-size: 15px;
     font-weight: bold;

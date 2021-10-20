@@ -25,10 +25,7 @@ const Home = () => {
     selectedTrack: "",
     listOfTracksFromAPI: [],
   });
-  const [trackId, setTrackId] = useState({
-    playPause: false,
-    selectedTrackId: null,
-  });
+  const [trackId, setTrackId] = useState(null);
 
   useEffect(() => {
     async function getCategories() {
@@ -81,11 +78,8 @@ const Home = () => {
   const getTrackId = (id) => {
     const currentTracks = [...tracks.listOfTracksFromAPI];
     const fliterTrackId = currentTracks?.filter((data) => data.track.id === id);
-    setTrackId({
-      playPause: !trackId.playPause,
-      selectedTrackId: fliterTrackId[0]?.track,
-    });
-    dispatch(fetchTrack(fliterTrackId));
+    setTrackId(fliterTrackId[0]?.track?.id);
+    dispatch(fetchTrack(fliterTrackId)); //리덕스로 보내놓고 사용하는곳은 없음
   };
 
   return (
@@ -114,7 +108,6 @@ const Home = () => {
               type={data.track.album.album_type}
               imgSrc={data.track.album.images[0].url}
               getTrackId={getTrackId}
-              trackId={trackId}
             />
           ))}
         </div>

@@ -3,11 +3,11 @@ import styled from "styled-components";
 import PlayButton from "./PlayButton";
 import { PlayButtonBlock } from "./PlayButton";
 
-const AlbumCrad = ({ id, name, type, imgSrc, getTrackId, trackId }) => {
+const AlbumCrad = ({ id, name, type, imgSrc, getTrackId }) => {
   return (
     <AlbumBlock>
       <AlbumImg src={imgSrc} />
-      <PlayButton getTrackId={getTrackId} id={id} trackId={trackId} />
+      <PlayButton getTrackId={getTrackId} id={id} />
       <AlbumTitleWrap>
         <AlbumName>{name}</AlbumName>
         <AlbumInfo>{type}</AlbumInfo>

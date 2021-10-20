@@ -8,8 +8,8 @@ const Playbar = () => {
 const PlaybarBlock = styled.div`
   width: 50%;
   height: 90px;
-  border: 0px solid black;
-  background: blue;
+  /* border: 0px solid black;
+  background: blue; */
 `;
 
 export default Playbar;

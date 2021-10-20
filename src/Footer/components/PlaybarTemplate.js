@@ -8,7 +8,7 @@ const PlaybarTemplate = ({ children }) => {
 const PlaybarBlock = styled.div`
   display: flex;
   align-items: center;
-  border: 2px solid grey;
+  border: 0.1px solid grey;
   width: 100%;
   height: 90px;
   background: black;

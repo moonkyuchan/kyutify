@@ -10,9 +10,9 @@ const Search = () => {
   const [tracks, setTracks] = useState([]);
   const [albums, setAlbums] = useState([]);
   console.log(inputValue);
-  // console.log("useEffect artist", artists);
-  // console.log("useEffect tracks", tracks);
-  // console.log("useEffect albums", albums);
+  console.log("useEffect artist", artists);
+  console.log("useEffect tracks", tracks);
+  console.log("useEffect albums", albums);
 
   useEffect(() => {
     async function getSearch(val) {
