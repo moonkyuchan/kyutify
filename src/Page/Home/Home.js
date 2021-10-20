@@ -128,7 +128,7 @@ const Section = styled.div`
   .section {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    overflow: hidden;
+    grid-gap: 20px;
     place-items: center;
     margin-top: 50px;
   }
