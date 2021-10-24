@@ -1,9 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import PlayButton from "./PlayButton";
+import { AiTwotoneHeart } from "react-icons/ai";
 import { PlayButtonBlock } from "./PlayButton";
 
-const AlbumCrad = ({ id, name, type, imgSrc, getTrackId }) => {
+const AlbumCrad = ({ id, name, type, imgSrc, getTrackId, goToLike }) => {
   return (
     <AlbumBlock>
       <AlbumImg src={imgSrc} />
@@ -12,6 +13,9 @@ const AlbumCrad = ({ id, name, type, imgSrc, getTrackId }) => {
         <AlbumName>{name}</AlbumName>
         <AlbumInfo>{type}</AlbumInfo>
       </AlbumTitleWrap>
+      <ButtonLike onClick={() => goToLike(id)} id={id}>
+        <AiTwotoneHeart style={{ color: "#ba2d65" }} />
+      </ButtonLike>
     </AlbumBlock>
   );
 };
@@ -19,6 +23,19 @@ const AlbumImg = styled.img`
   width: 170px;
   height: 170px;
   border: 0px solid black;
+`;
+
+const AlbumName = styled.h1`
+  font-weight: bold;
+  display: inline-block;
+
+  -webkit-transition: 3.3s;
+  -moz-transition: 3.3s;
+  transition: 3.3s;
+
+  -webkit-transition-timing-function: linear;
+  -moz-transition-timing-function: linear;
+  transition-timing-function: linear;
 `;
 
 const AlbumBlock = styled.div`
@@ -34,6 +51,14 @@ const AlbumBlock = styled.div`
   cursor: pointer;
   transition: background 0.3s ease-in;
 
+  -webkit-transition: 3.3s;
+  -moz-transition: 3.3s;
+  transition: 3.3s;
+
+  -webkit-transition-timing-function: linear;
+  -moz-transition-timing-function: linear;
+  transition-timing-function: linear;
+
   &:hover {
     background: #484848;
     ${AlbumImg} {
@@ -43,6 +68,10 @@ const AlbumBlock = styled.div`
       display: inherit;
       transform: translateY(-5px);
       opacity: 1;
+    }
+    ${AlbumName} {
+      margin-left: -120px;
+      text-decoration: none;
     }
   }
 `;
@@ -57,14 +86,31 @@ const AlbumTitleWrap = styled.div`
   text-overflow: ellipsis;
   white-space: nowrap;
 `;
-const AlbumName = styled.h1`
-  font-weight: bold;
-`;
+
 const AlbumInfo = styled.h4`
   margin-top: 15px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+`;
+
+const ButtonLike = styled.div`
+  position: relative;
+  bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid white;
+  border-radius: 50%;
+  padding: 10px;
+  width: 40px;
+  height: 40px;
+  background: black;
+  cursor: pointer;
+  &:hover {
+    background: white;
+    border: none;
+  }
 `;
 
 export default AlbumCrad;

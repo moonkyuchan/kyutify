@@ -5,18 +5,13 @@ import styled from "styled-components";
 import { instance } from "../../config";
 import SearchTemplate from "./Components/SearchTemplate";
 import AlbumCard from "../../Components/AlbumCard";
-// import axios from "axios";
 
 const Search = () => {
   const dispatch = useDispatch();
   const [inputValue, setInputValue] = useState("");
   const [artists, setArtists] = useState([]);
-  console.log(artists);
-  // const [tracks, setTracks] = useState([]);
-  // const [albums, setAlbums] = useState([]);
-  // console.log("아티스트", artists);
-  // console.log("트랙", tracks);
-  // console.log("앨범", albums);
+  const [tracks, setTracks] = useState([]);
+  const [trackId, setTrackId] = useState(null);
 
   useEffect(() => {
     async function getSearch(val) {
@@ -25,8 +20,11 @@ const Search = () => {
       );
       const setting = (res) => {
         setArtists(res.data.artists.items);
-        // setTracks(res.data.tracks.items);
-        // setAlbums(res.data.albums.items);
+        setTracks(
+          res.data.tracks.items.filter((data) => {
+            return data.artists[0].name === inputValue;
+          })
+        );
       };
       return setting(res);
     }
@@ -44,19 +42,18 @@ const Search = () => {
     e.preventDefault();
   };
 
-  // const getTrackId = (id) => {
-  //   const currentTracks = [...artists];
-  //   const fliterTrackId = currentTracks?.filter((data) => data.id === id);
-  //   setTrackId(fliterTrackId[0]?.id);
-  //   dispatch(fetchTrack(fliterTrackId));
-  // };
+  const getTrackId = (id) => {
+    const currentTracks = [...artists];
+    const fliterTrackId = currentTracks?.filter((data) => data.id === id);
+    setTrackId(fliterTrackId[0]?.id);
+    dispatch(fetchTrack(fliterTrackId));
+  };
 
   return (
     <SearchTemplate>
       <SearchInput>
         <form onSubmit={searchForm}>
           <SearchBar placeholder="검색" onChange={handleInput} />
-          {/* <SearchButton type="submit">Search</SearchButton> */}
         </form>
       </SearchInput>
       <SearchSection>
@@ -69,7 +66,7 @@ const Search = () => {
                 imgSrc={data.images[1]?.url}
                 name={data.name}
                 type={data.type}
-                // getTrackId={getTrackId}
+                getTrackId={getTrackId}
               />
             )
         )}
@@ -92,19 +89,19 @@ const SearchBar = styled.input`
   }
 `;
 
-const SearchButton = styled.button`
-  border: 0px solid black;
-  border-radius: 10px;
-  background: #eeeeee;
-  width: 120px;
-  height: 40px;
-  margin-left: 20px;
-  &:hover {
-    background: #1b1b1b;
-    color: #f5f5f5;
-    border: 1px solid white;
-  }
-`;
+// const SearchButton = styled.button`
+//   border: 0px solid black;
+//   border-radius: 10px;
+//   background: #eeeeee;
+//   width: 120px;
+//   height: 40px;
+//   margin-left: 20px;
+//   &:hover {
+//     background: #1b1b1b;
+//     color: #f5f5f5;
+//     border: 1px solid white;
+//   }
+// `;
 
 const SearchSection = styled.div`
   display: grid;

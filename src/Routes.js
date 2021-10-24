@@ -5,7 +5,7 @@ import Nav from "./Nav/Nav";
 import Home from "./Page/Home/Home";
 import Library from "./Page/Library/Library";
 import Search from "./Page/Search/Search";
-import Footer from "./Footer/Footer";
+// import Footer from "./Footer/Footer";
 
 const Routes = () => {
   return (
@@ -18,7 +18,7 @@ const Routes = () => {
           <Route exact path="/library" component={Library} />
         </Switch>
       </RouteBlock>
-      <Footer />
+      {/* <Footer /> */}
     </Router>
   );
 };

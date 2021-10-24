@@ -15,3 +15,12 @@ export const fetchTrack = (track) => {
     payload: track,
   };
 };
+
+export const LIKE = "LIKE";
+
+export const fetchLike = (like) => {
+  return {
+    type: LIKE,
+    payload: like,
+  };
+};

@@ -4,10 +4,10 @@ import { instance, GET_CATEGORIES } from "../../config";
 import axios from "axios";
 import styled from "styled-components";
 import MainNav from "../MainNav/MainNav";
-import HomeTemplate from "./Component/HomeTemplate";
+import HomeTemplate from "./Components/HomeTemplate";
 import AlbumCard from "../../Components/AlbumCard";
-import DropDown from "./Component/DropDown";
-import { fetchTrack } from "../../store/action";
+import DropDown from "./Components/DropDown";
+import { fetchTrack, fetchLike } from "../../store/action";
 
 const Home = () => {
   const token = useSelector((state) => state.tokenReducer);
@@ -26,6 +26,7 @@ const Home = () => {
     listOfTracksFromAPI: [],
   });
   const [trackId, setTrackId] = useState(null);
+  const [likeTrack, setLikeTrack] = useState({});
 
   useEffect(() => {
     async function getCategories() {
@@ -79,7 +80,15 @@ const Home = () => {
     const currentTracks = [...tracks.listOfTracksFromAPI];
     const fliterTrackId = currentTracks?.filter((data) => data.track.id === id);
     setTrackId(fliterTrackId[0]?.track?.id);
-    dispatch(fetchTrack(fliterTrackId)); //리덕스로 보내놓고 사용하는곳은 없음
+    dispatch(fetchTrack(fliterTrackId));
+  };
+
+  const goToLike = (id) => {
+    const currentTracks = [...tracks.listOfTracksFromAPI];
+    const fliterLikeTrack = currentTracks?.filter(
+      (data) => data.track.id === id
+    );
+    dispatch(fetchLike(fliterLikeTrack));
   };
 
   return (
@@ -108,6 +117,7 @@ const Home = () => {
               type={data.track.album.album_type}
               imgSrc={data.track.album.images[0].url}
               getTrackId={getTrackId}
+              goToLike={goToLike}
             />
           ))}
         </div>
@@ -128,7 +138,7 @@ const Section = styled.div`
   .section {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    grid-gap: 20px;
+    grid-gap: 30px;
     place-items: center;
     margin-top: 50px;
   }
